@@ -17,4 +17,17 @@ public class Account {
 
     protected Account() {
     }
+
+    public Account(String accountNumber, BigDecimal balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
 }
