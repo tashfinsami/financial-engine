@@ -1,0 +1,29 @@
+package com.engine.financialengine.service;
+
+import java.math.BigDecimal;
+
+import org.springframework.stereotype.Service;
+
+import com.engine.financialengine.dto.AccountRequest;
+import com.engine.financialengine.entity.Account;
+import com.engine.financialengine.repository.AccountRepository;
+
+@Service
+public class AccountService {
+
+    private final AccountRepository accountRepository;
+
+    public AccountService(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
+
+    public Account createAccount(AccountRequest request) {
+
+        Account account = new Account(
+            request.getAccountNumber(),
+            BigDecimal.ZERO
+        );
+
+        return accountRepository.save(account);
+    }
+}
