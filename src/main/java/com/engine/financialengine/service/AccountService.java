@@ -8,6 +8,8 @@ import com.engine.financialengine.dto.AccountRequest;
 import com.engine.financialengine.entity.Account;
 import com.engine.financialengine.repository.AccountRepository;
 
+import com.engine.financialengine.exception.AccountNotFoundException;
+
 @Service
 public class AccountService {
 
@@ -25,5 +27,12 @@ public class AccountService {
         );
 
         return accountRepository.save(account);
+    }
+
+    public Account getAccount(Long id) {
+        return accountRepository.findById(id)
+                .orElseThrow(() ->
+                    new AccountNotFoundException(id)
+                );
     }
 }

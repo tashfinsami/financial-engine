@@ -22,4 +22,9 @@ public class AccountController {
     public Account createAccount(@Valid @RequestBody AccountRequest request) {
         return accountService.createAccount(request);
     }
+
+    @GetMapping("/{id}")
+    public Account getAccount(@PathVariable Long id) {
+        return accountService.getAccount(id);
+    }
 }
