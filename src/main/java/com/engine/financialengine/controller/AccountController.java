@@ -1,6 +1,7 @@
 package com.engine.financialengine.controller;
 
 import com.engine.financialengine.dto.AccountRequest;
+import com.engine.financialengine.dto.AccountUpdateRequest;
 import com.engine.financialengine.entity.Account;
 import com.engine.financialengine.service.AccountService;
 
@@ -26,5 +27,13 @@ public class AccountController {
     @GetMapping("/{id}")
     public Account getAccount(@PathVariable Long id) {
         return accountService.getAccount(id);
+    }
+
+    @PatchMapping("/{id}")
+    public Account updateAccount(
+            @PathVariable Long id,
+            @Valid @RequestBody AccountUpdateRequest request) {
+
+        return accountService.updateAccount(id, request);
     }
 }

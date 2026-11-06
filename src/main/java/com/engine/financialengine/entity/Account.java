@@ -13,6 +13,8 @@ public class Account {
 
     private String accountNumber;
 
+    private String nickname;
+
     private BigDecimal balance;
 
     protected Account() {
@@ -23,11 +25,23 @@ public class Account {
         this.balance = balance;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getAccountNumber() {
         return accountNumber;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
     public BigDecimal getBalance() {
         return balance;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }
