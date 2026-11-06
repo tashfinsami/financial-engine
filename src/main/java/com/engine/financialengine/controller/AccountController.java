@@ -4,6 +4,8 @@ import com.engine.financialengine.dto.AccountRequest;
 import com.engine.financialengine.entity.Account;
 import com.engine.financialengine.service.AccountService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,7 +19,7 @@ public class AccountController {
     }
 
     @PostMapping
-    public Account createAccount(@RequestBody AccountRequest request) {
+    public Account createAccount(@Valid @RequestBody AccountRequest request) {
         return accountService.createAccount(request);
     }
 }
