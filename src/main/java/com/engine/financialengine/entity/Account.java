@@ -15,7 +15,8 @@ public class Account {
 
     private String nickname;
 
-    private BigDecimal balance;
+    @Column(nullable = false)
+    private BigDecimal balance = BigDecimal.ZERO;
 
     @Version
     private Long version;
