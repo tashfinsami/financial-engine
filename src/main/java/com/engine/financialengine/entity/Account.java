@@ -17,6 +17,9 @@ public class Account {
 
     private BigDecimal balance;
 
+    @Version
+    private Long version;
+
     protected Account() {
     }
 
