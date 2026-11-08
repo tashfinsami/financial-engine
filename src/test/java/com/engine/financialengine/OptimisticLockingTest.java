@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ import java.util.concurrent.ExecutionException;
 
 @SpringBootTest
 class OptimisticLockingTest {
+
+    private Long accountId;
 
     @Autowired
     private AccountRepository accountRepository;
@@ -40,10 +43,10 @@ class OptimisticLockingTest {
     void shouldDetectConcurrentUpdates() throws Exception {
 
         Account testAccount = accountRepository.save(
-                new Account("TEST-001", new BigDecimal("1000"))
+                new Account("TEST-OPTIMISTIC-001", new BigDecimal("1000"))
         );
 
-        Long accountId = testAccount.getId();
+        accountId = testAccount.getId();
 
         CountDownLatch bothLoaded = new CountDownLatch(2);
         CountDownLatch firstCommitted = new CountDownLatch(1);
@@ -93,6 +96,13 @@ class OptimisticLockingTest {
         System.out.println(exception.getCause());
 
         executor.shutdown();
+    }
+
+    @AfterEach
+    void cleanUp() {
+        if (accountId != null) {
+            accountRepository.deleteById(accountId);
+        }
     }
 
     private void awaitLatch(CountDownLatch latch) {
