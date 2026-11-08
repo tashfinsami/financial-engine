@@ -39,6 +39,12 @@ class OptimisticLockingTest {
     @Test
     void shouldDetectConcurrentUpdates() throws Exception {
 
+        Account testAccount = accountRepository.save(
+                new Account("TEST-001", new BigDecimal("1000"))
+        );
+
+        Long accountId = testAccount.getId();
+
         CountDownLatch bothLoaded = new CountDownLatch(2);
         CountDownLatch firstCommitted = new CountDownLatch(1);
 
@@ -46,7 +52,7 @@ class OptimisticLockingTest {
 
         Future<?> first = executor.submit(() -> {
             transactionTemplate.execute(status -> {
-                Account account = accountRepository.findById(2L)
+                Account account = accountRepository.findById(accountId)
                         .orElseThrow();
 
                 bothLoaded.countDown();
@@ -64,7 +70,7 @@ class OptimisticLockingTest {
 
         Future<?> second = executor.submit(() -> {
             transactionTemplate.execute(status -> {
-                Account account = accountRepository.findById(2L)
+                Account account = accountRepository.findById(accountId)
                         .orElseThrow();
 
                 bothLoaded.countDown();
