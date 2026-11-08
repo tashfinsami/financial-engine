@@ -44,4 +44,8 @@ public class Account {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
 }
