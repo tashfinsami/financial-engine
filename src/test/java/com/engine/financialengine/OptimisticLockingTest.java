@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -22,6 +23,7 @@ import com.engine.financialengine.repository.AccountRepository;
 import java.util.concurrent.ExecutionException;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class OptimisticLockingTest {
 
     private Long accountId;
